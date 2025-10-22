@@ -1,0 +1,21 @@
+first_str = input()#5
+second_str = input()# 0 3 5 11 11
+
+
+def main(first_str, second_str):
+    digits = []
+    spaces = []
+    for symbol in second_str:
+        if symbol not in digits and symbol != ' ':
+            digits.append(symbol)
+        else:
+            symbol = '_'
+            spaces.append(symbol)
+    digits.extend(spaces)
+    result = ' '.join(digits)
+    return result
+
+
+if __name__ == '__main__':
+    result = main(first_str, second_str)
+    print(result)
