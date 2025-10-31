@@ -1,4 +1,4 @@
-# ID 147023292
+# ID 147124009
 """Служба доставки (Delivery service).
 
 Программа определяем минимальное количество транспортных платформ для
@@ -17,30 +17,26 @@
 перевозки роботов.
 """
 
-weights_of_robots: str = input()
-limit: int = int(input())
 
-
-def platform_count_calculation(weights_of_robots: str, limit: int) -> int:
+def platform_count_calculation(weight: list[int], limit: int) -> int:
     """Определяет количество платформ необходимых для перевозки роботов.
 
     Возвращает целое число - количество платформ.
     """
-    weight: list[int] = list(map(int, weights_of_robots.split()))
     sorted_weights: list[int] = sorted(weight)
     left_index: int = 0
     right_index: int = len(sorted_weights) - 1
     platforms: int = 0
     while left_index <= right_index:
         if sorted_weights[left_index] + sorted_weights[right_index] <= limit:
-            platforms += 1
             left_index += 1
-            right_index -= 1
-        else:
-            platforms += 1
-            right_index -= 1
+        platforms += 1
+        right_index -= 1
     return platforms
 
 
 if __name__ == '__main__':
-    print(platform_count_calculation(weights_of_robots, limit))
+    weights_of_robots: str = input()
+    limit: int = int(input())
+    weight: list[int] = [int(digit) for digit in weights_of_robots.split()]
+    print(platform_count_calculation(weight, limit))
