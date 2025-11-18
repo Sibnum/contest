@@ -1,4 +1,4 @@
-# ID147916442
+# ID149156933
 """Шифрованные инструкции (Encrypted_instructions).
 
 Программа расшифровывает сжатые сообщения и возвращает строку с командами.
@@ -21,19 +21,21 @@ def decoding(command: str) -> str:
     декодирования использует стэк.
     Возвращает строку с полной формой команды.
     """
-    stack: list[tuple[str, int]] = []
+    stack: list[tuple[str, str]] = []
     current_string: str = ''
-    current_number: int = 0
+    current_number: str = ''
     for symbol in command:
         if symbol in string.digits:
-            current_number = current_number * 10 + int(symbol)
+            current_number += symbol
         elif symbol == '[':
             stack.append((current_string, current_number))
             current_string = ''
-            current_number = 0
+            current_number = ''
         elif symbol == ']':
             previous_string, repeat_number = stack.pop()
-            current_string = previous_string + current_string * repeat_number
+            current_string = (
+                previous_string + current_string * int(repeat_number)
+                )
         else:
             current_string += symbol
     return current_string
